@@ -22,4 +22,3 @@ struct CustomTabView: View {
 #Preview {
     CustomTabView()
 }
-

@@ -4,73 +4,90 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                TitleEkiDongelek()
+                TitleEkiDongelek
                 cards
                 
                 Spacer()
                 
-                Button(action: {
-                    
-                }) {
-                    Text("Brondau")
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.blue)
-                        .cornerRadius(15)
-                        .padding([.horizontal, .bottom], 10)
+                NavigationLink(destination: newListBron) {
+                    RoundedRectangle(cornerRadius: 15)
+                        .frame(width: 330, height: 60)
+                        .foregroundColor(.blue)
+                        .shadow(radius: 3)
+                        .overlay(
+                            VStack{
+                                Text("Brondau")
+                                    .font(.title2)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(15)
+                                    .padding(.horizontal)
+                            }
+                                .padding(.horizontal)
+                    )
+                        
                 }
             }
         }
     }
     
-    // Заголовок экрана
-    struct TitleEkiDongelek: View {
-        var body: some View {
-            VStack(alignment: .leading) {
-                Text("Eki dongelek")
-                    .font(.largeTitle)
-                    .foregroundColor(.blue)
-                    .padding(.bottom, 10)
-            }
+    
+    private var  TitleEkiDongelek: some View {
+        VStack(alignment: .leading) {
+            Text("Eki dongelek")
+                .font(.largeTitle)
+                .foregroundColor(.black)
+                .padding(.bottom, 10)
         }
     }
     
     private var cards: some View {
         ScrollView(.horizontal, showsIndicators: true) {
             LazyHStack(spacing: 20) {
-                CardView(title: "alpha", description: "17000 tg/ayina")
-                CardView(title: "beta", description: "17000 tg/ayina")
-                CardView(title: "samuray", description: "17000 tg/ayina")
+                CardView(title: "alpha", description: "17000 tg/ayina", image: "moped-alpha")
+                CardView(title: "beta", description: "17000 tg/ayina", image: "beta-rr")
+                CardView(title: "samuray", description: "17000 tg/ayina", image: "samuray")
             }
             .padding(.horizontal)
         }
     }
     
-    // Представление карточки
+    
     struct CardView: View {
         var title: String
         var description: String
-        
+        var image: String
         var body: some View {
+            RoundedRectangle(cornerRadius: 15)
+                .stroke(Color.blue, lineWidth: 2)
+                .frame(width: 300, height: 500)
+                .foregroundColor(.blue)
+                .shadow(radius: 3)
+                .overlay(
+                    VStack(alignment: .leading) {
+                        ZStack{
+                            Image(image)
+                                .resizable()
+                        }
+                        Text(title)
+                            .font(.title)
+                            .foregroundColor(.black)
+                        
+                        Text(description)
+                            .font(.headline)
+                            .foregroundColor(.black)
+                    }
+                        .padding()
+                )
+        }
+    }
+    
+    private var newListBron: some View {
+        NavigationView {
             VStack {
-                Text(title)
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                
-                Spacer()
-                
-                Text(description)
-                    .font(.headline)
-                    .foregroundColor(.white)
+                Text("Soon..")
+                    .font(.largeTitle)
             }
-            .padding()
-            .frame(width: 300, height: 500)
-            .background(Color.blue)
-            .cornerRadius(15)
-            .shadow(radius: 5)
         }
     }
 }
